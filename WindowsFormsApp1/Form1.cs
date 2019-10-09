@@ -35,13 +35,14 @@ namespace WindowsFormsApp1
             {                
                 SqlConnection myconn = new SqlConnection(con);
                 myconn.Open();
-                object b = myds.Tables["T_SyncTable"].Rows[i][0];
-                object c = myds.Tables["T_SyncTable"].Rows[i][1];
-                object d = myds.Tables["T_SyncTable"].Rows[i][2];
-                object ee = myds.Tables["T_SyncTable"].Rows[i][3];
+                object b = myds.Tables["T_SyncTable"].Rows[i][1];
+                object c = myds.Tables["T_SyncTable"].Rows[i][2];
+                object d = myds.Tables["T_SyncTable"].Rows[i][3];
+                object ee = myds.Tables["T_SyncTable"].Rows[i][4];
                 sqll = "insert into T_SyncTable(AlarmContent,InsertTime,IsSync,Remark) values(" + b + "," + c + "," + d + "," + ee + ")";
                 SqlCommand comm = new SqlCommand(sqll, myconn);
                 comm.ExecuteReader();
+                myds.Tables["T_SyncTable"].Rows[i][3] = 1;
                 mycon.Close();
             } 
         }

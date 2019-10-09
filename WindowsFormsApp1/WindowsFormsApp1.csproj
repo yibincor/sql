@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="PubConstant.cs" />
     <Compile Include="SQLServer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
