@@ -16,8 +16,9 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-        }
-        private void Button1_Click(object sender, EventArgs e)
+        }        
+
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             string sql = "select * from T_SyncTable where IsSync = 0";
             DataSet myds = Maticsoft.DBUtility.DbHelperSQL.Query(sql, null);
@@ -25,10 +26,10 @@ namespace WindowsFormsApp1
             conn = "Server=172.18.3.119;Database=SK_CKAlarm;user id=sa;password=security999;";
             int Count = myds.Tables["ds"].Rows.Count;
             for (int i = 1; i <= Count; i++)
-            {            
-                object b= myds.Tables["ds"].Rows[i-1][0];
+            {
+                object b = myds.Tables["ds"].Rows[i - 1][0];
                 Maticsoft.DBUtility.DbHelperSQL.ExecuteSql("update T_SyncTable set IsSync = 1 where id = " + b + "");
             }
-        }            
+        }
     }
 }
