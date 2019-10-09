@@ -1,4 +1,5 @@
-﻿public class PubConstant
+﻿using System.Configuration;
+public class PubConstant
 {
     /// <summary>
     /// 获取连接字符串
@@ -11,7 +12,7 @@
             string ConStringEncrypt = ConfigurationManager.AppSettings["ConStringEncrypt"];
             if (ConStringEncrypt == "true")
             {
-                _connectionString = DESEncrypt.Decrypt(_connectionString);
+                //_connectionString = DESEncrypt.Decrypt(_connectionString);
             }
             return _connectionString;
         }
@@ -27,7 +28,7 @@
         string ConStringEncrypt = ConfigurationManager.AppSettings["ConStringEncrypt"];
         if (ConStringEncrypt == "true")
         {
-            connectionString = DESEncrypt.Decrypt(connectionString);
+            //connectionString = DESEncrypt.Decrypt(connectionString);
         }
         return connectionString;
     }
