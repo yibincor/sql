@@ -22,14 +22,73 @@ namespace WindowsFormsApp1
         {
             string sql = "select * from T_SyncTable where IsSync = 0";
             DataSet myds = Maticsoft.DBUtility.DbHelperSQL.Query(sql, null);
-            string conn, sqll;
-            conn = "Server=172.18.3.119;Database=SK_CKAlarm;user id=sa;password=security999;";
+            string conn;
+            conn = "Server=192.168.43.50;Database=SK_CKAlarm;user id=sa;password=security999;";
             int Count = myds.Tables["ds"].Rows.Count;
             for (int i = 1; i <= Count; i++)
             {
-                object b = myds.Tables["ds"].Rows[i - 1][0];
-                Maticsoft.DBUtility.DbHelperSQL.ExecuteSql("update T_SyncTable set IsSync = 1 where id = " + b + "");
+                object aa,bb,cc,dd,ee, ff, gg;
+                if (myds.Tables["ds"].Rows[i - 1][1] == DBNull.Value)
+                {
+                    aa = "null";
+                }
+                else
+                {
+                    aa = "'"+myds.Tables["ds"].Rows[i - 1][1]+"'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][2] == DBNull.Value)
+                {
+                    bb = "null";
+                }
+                else
+                {
+                    bb = "'"+myds.Tables["ds"].Rows[i - 1][2] + "'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][3] == DBNull.Value)
+                {
+                    cc = "null";
+                }
+                else
+                {
+                    cc = "'"+myds.Tables["ds"].Rows[i - 1][3] + "'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][4] == DBNull.Value)
+                {
+                    dd = "null";
+                }
+                else
+                {
+                    dd = "'"+ myds.Tables["ds"].Rows[i - 1][4] + "'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][5]==DBNull.Value)
+                {
+                    ee = "null";
+                }
+                else
+                {
+                    ee = "'"+myds.Tables["ds"].Rows[i - 1][5] + "'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][6] == DBNull.Value)
+                {
+                    ff = "null";
+                }
+                else
+                {
+                    ff = "'"+myds.Tables["ds"].Rows[i - 1][6] + "'";
+                }
+                if (myds.Tables["ds"].Rows[i - 1][7] == DBNull.Value)
+                {
+                    gg = "null";
+                }
+                else
+                {
+                    gg = "'"+myds.Tables["ds"].Rows[i - 1][7] + "'";
+                }                
+                Maticsoft.DBUtility.DbHelperSQL.ExecuteSql1(Maticsoft.DBUtility.DbHelperSQL.connectionString2, "insert into T_SyncTable(AlarmContent,InsertTime,IsSync,Remark,Remark1,Remark2,Remark3) values(" + aa+", "+bb+", "+cc+", "+dd+","+ee+","+ff+","+gg+")");
+                object b = myds.Tables["ds"].Rows[i - 1][0];               
+                Maticsoft.DBUtility.DbHelperSQL.ExecuteSql("update T_SyncTable set IsSync = 1 where id = " + b + "");               
             }
+           
         }
     }
 }

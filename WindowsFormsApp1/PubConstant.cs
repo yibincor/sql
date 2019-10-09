@@ -32,4 +32,17 @@ public class PubConstant
         }
         return connectionString;
     }
+    public static string ConnectionString2
+    {
+        get
+        {
+            string _connectionString2 = ConfigurationManager.AppSettings["ConnectionString2"];
+            string ConStringEncrypt2 = ConfigurationManager.AppSettings["ConStringEncrypt2"];
+            if (ConStringEncrypt2 == "true")
+            {
+                //_connectionString2 = DESEncrypt.Decrypt(_connectionString2);
+            }
+            return _connectionString2;
+        }
+    }
 }

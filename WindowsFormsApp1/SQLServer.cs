@@ -16,9 +16,9 @@ namespace Maticsoft.DBUtility
     {
         //数据库连接字符串(web.config来配置)，多数据库可使用DbHelperSQLP来实现.
         public static string connectionString = PubConstant.ConnectionString;
-        //public static string connectionString ="server=127.0.0.1;database=SK_CKAlarm;uid=sa;pwd=8482134";
+        public static string connectionString2 = PubConstant.ConnectionString2;
         public DbHelperSQL()
-        {
+        {           
         }
 
         #region 公用方法
@@ -133,6 +133,26 @@ namespace Maticsoft.DBUtility
         public static int ExecuteSql(string SQLString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows;
+                    }
+                    catch (System.Data.SqlClient.SqlException e)
+                    {
+                        connection.Close();
+                        throw e;
+                    }
+                }
+            }
+        }
+        public static int ExecuteSql1(string str ,string SQLString)
+        {
+            using (SqlConnection connection = new SqlConnection(str))
             {
                 using (SqlCommand cmd = new SqlCommand(SQLString, connection))
                 {
@@ -786,5 +806,4 @@ namespace Maticsoft.DBUtility
         #endregion
 
     }
-
 }
