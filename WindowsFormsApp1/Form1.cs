@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
                     gg = "'" + myds.Tables["ds"].Rows[i - 1][7] + "'";
                 }
                 Maticsoft.DBUtility.DbHelperSQL.ExecuteSql1(Maticsoft.DBUtility.DbHelperSQL.connectionString2, "insert into T_SyncTable(AlarmContent,InsertTime,IsSync,Remark,Remark1,Remark2,Remark3) values(" + aa + ", " + bb + ", " + cc + ", " + dd + "," + ee + "," + ff + "," + gg + ")");
-                textBox2.Text = "同步成功数据：" + i+ "条";               
+                textBox2.Text = "前一次已同步成功数据：" + i+ "条";               
                 object b = myds.Tables["ds"].Rows[i - 1][0];
                 Maticsoft.DBUtility.DbHelperSQL.ExecuteSql("update T_SyncTable set IsSync = 1 where id = " + b + "");
             }
