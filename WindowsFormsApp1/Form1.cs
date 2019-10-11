@@ -23,8 +23,8 @@ namespace WindowsFormsApp1
             string sql = "select * from T_SyncTable where IsSync = 0";
             DataSet myds = Maticsoft.DBUtility.DbHelperSQL.Query(sql, null);
             int Count = myds.Tables["ds"].Rows.Count;
-            textBox1.Text = DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss ") + "获取需要同步的数据：" + Count;
-            for (int i = 1; i <= Count; i++)
+            textBox1.Text = DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss ") + "获取需要同步的数据：" + Count+"条";
+            for (i = 1; i <= Count; i++)
             {               
                 object aa, bb, cc, dd, ee, ff, gg;
                 if (myds.Tables["ds"].Rows[i - 1][1] == DBNull.Value)
@@ -83,15 +83,16 @@ namespace WindowsFormsApp1
                 {
                     gg = "'" + myds.Tables["ds"].Rows[i - 1][7] + "'";
                 }
+                j = j + i;
                 Maticsoft.DBUtility.DbHelperSQL.ExecuteSql1(Maticsoft.DBUtility.DbHelperSQL.connectionString2, "insert into T_SyncTable(AlarmContent,InsertTime,IsSync,Remark,Remark1,Remark2,Remark3) values(" + aa + ", " + bb + ", " + cc + ", " + dd + "," + ee + "," + ff + "," + gg + ")");
-                textBox2.Text = "前一次已同步成功数据：" + i+ "条";               
+                textBox2.Text = myds.Tables["ds"].Rows[i - 1][2]+" 已同步成功数据：" + i+ "条"+" 总同步成功数据："+j + "条";               
                 object b = myds.Tables["ds"].Rows[i - 1][0];
                 Maticsoft.DBUtility.DbHelperSQL.ExecuteSql("update T_SyncTable set IsSync = 1 where id = " + b + "");
             }
             timer1.Enabled = true;
         }
 
-        int i = 0;
+        int i = 0;int j = 0;
 
         private void Button1_Click(object sender, EventArgs e)
         {
