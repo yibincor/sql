@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class DBInsert
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -65,7 +65,7 @@
             this.textBox2.Size = new System.Drawing.Size(374, 21);
             this.textBox2.TabIndex = 4;
             // 
-            // Form1
+            // DBinsert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,8 +73,8 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "DBinsert";
+            this.Text = "DBInsert";
             this.ResumeLayout(false);
             this.PerformLayout();
 
