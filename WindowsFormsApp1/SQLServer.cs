@@ -150,6 +150,28 @@ namespace Maticsoft.DBUtility
                 }
             }
         }
+
+        public static int ExecuteSql2(string SQLString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString2))
+            {
+                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows;
+                    }
+                    catch (System.Data.SqlClient.SqlException e)
+                    {
+                        connection.Close();
+                        throw e;
+                    }
+                }
+            }
+        }
+
         public static int ExecuteSql1(string str ,string SQLString)
         {
             using (SqlConnection connection = new SqlConnection(str))
@@ -414,24 +436,25 @@ namespace Maticsoft.DBUtility
         /// </summary>
         /// <param name="SQLString">查询语句</param>
         /// <returns>DataSet</returns>
-        public static DataSet Query(string SQLString)
+        public static DataSet Query2(string SQLString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString2))
             {
-                DataSet ds = new DataSet();
+                DataSet dt = new DataSet();
                 try
                 {
                     connection.Open();
                     SqlDataAdapter command = new SqlDataAdapter(SQLString, connection);
-                    command.Fill(ds, "ds");
+                    command.Fill(dt, "dt");
                 }
                 catch (System.Data.SqlClient.SqlException ex)
                 {
                     throw new Exception(ex.Message);
                 }
-                return ds;
+                return dt;
             }
         }
+
         public static DataSet Query(string SQLString, int Times)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
